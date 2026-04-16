@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { getCurrentSession } from "@/lib/auth/session";
+
 type NavItem = {
   label: string;
   tone?: "blue" | "orange";
@@ -406,11 +410,13 @@ function PickProductCard({ product }: { product: PickProduct }) {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const session = await getCurrentSession();
+
   return (
     <main className="min-h-screen bg-white text-[#3d3d3d]">
       <header className="sticky top-0 z-50 border-b-2 border-[#ff6f9e] bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-[1180px] items-center gap-8 px-5">
+        <div className="mx-auto flex h-14 max-w-[1180px] items-center gap-4 px-5 lg:gap-8">
           <button
             type="button"
             aria-label="전체 메뉴"
@@ -441,6 +447,37 @@ export default function Home() {
               </a>
             ))}
           </nav>
+
+          <div className="flex shrink-0 items-center gap-2 border-l border-[#ececec] pl-4 text-sm font-black">
+            {session ? (
+              <>
+                <span className="hidden max-w-32 truncate text-[#555] sm:inline">
+                  {session.user.name}님
+                </span>
+                <a
+                  href="/api/auth/logout"
+                  className="rounded-full bg-[#1f2533] px-4 py-2 text-white transition hover:bg-[#ff4f93]"
+                >
+                  로그아웃
+                </a>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="hidden text-[#777] transition hover:text-[#ff4f93] sm:inline"
+                >
+                  로그인
+                </Link>
+                <Link
+                  href="/signup"
+                  className="rounded-full bg-[#ff4f93] px-4 py-2 text-white transition hover:bg-[#1f2533]"
+                >
+                  회원가입
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
