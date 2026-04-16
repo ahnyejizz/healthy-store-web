@@ -2,10 +2,14 @@
   "name": "healthy-store-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "zsh -lc 'source ~/.nvm/nvm.sh >/dev/null 2>&1 && nvm use 20.20.2 >/dev/null && next build'",
+    "build": "next build",
     "start": "zsh -lc 'source ~/.nvm/nvm.sh >/dev/null 2>&1 && nvm use 20.20.2 >/dev/null && next dev'",
+    "serve": "next start",
     "lint": "eslint"
   },
   "dependencies": {

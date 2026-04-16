@@ -17,7 +17,11 @@ type UserStoreData = {
   users: StoredEmailUser[];
 };
 
-const usersDirectory = path.join(process.cwd(), ".data");
+const usersDirectory =
+  process.env.AUTH_DATA_DIR ??
+  (process.env.VERCEL
+    ? path.join("/tmp", "healthy-store-web")
+    : path.join(process.cwd(), ".data"));
 const usersFile = path.join(usersDirectory, "users.json");
 const hashIterations = 120_000;
 const hashLength = 32;
