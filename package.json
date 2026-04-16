@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "zsh -lc 'source ~/.nvm/nvm.sh >/dev/null 2>&1 && nvm use 20.20.2 >/dev/null && next build'",
+    "start": "zsh -lc 'source ~/.nvm/nvm.sh >/dev/null 2>&1 && nvm use 20.20.2 >/dev/null && next dev'",
     "lint": "eslint"
   },
   "dependencies": {
